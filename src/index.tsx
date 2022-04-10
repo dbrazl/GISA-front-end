@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { ThemeProvider } from 'styled-components';
 import theme from './global/theme';
 import GlobalStyles from './global/styles';
@@ -17,6 +20,7 @@ ReactDOM.render(
       </ThemeProvider>
     </SharedState>
     <GlobalStyles />
+    <ToastContainer />
   </React.StrictMode>,
   document.getElementById('root')
 );
