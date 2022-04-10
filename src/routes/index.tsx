@@ -11,6 +11,7 @@ import { UserContext } from '../state/user/userState';
 import { PublicRoute } from './Route';
 
 import Login from '../pages/Login';
+import Dashboard from '../pages/Dashboard';
 
 const AppRoutes: React.FC = () => {
   const { state } = useContext(UserContext);
@@ -20,6 +21,9 @@ const AppRoutes: React.FC = () => {
       <Routes>
         <Route path="/" element={<PublicRoute signed={state.status.signed} />}>
           <Route path="/" element={<Login />} />
+        </Route>
+        <Route path="/dashboard" element={<PublicRoute signed={state.status.signed} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
       </Routes>
     </Router>

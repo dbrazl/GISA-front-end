@@ -10,5 +10,5 @@ export const PrivateRoute = ({  signed }: IRoute) => {
 }
 
 export const PublicRoute = ({ signed }: IRoute) => {
-  return signed ? <Navigate to="/companies" /> : <Outlet />;
+  return signed ? <Navigate to="/dashboard" /> : <Outlet />;
 }

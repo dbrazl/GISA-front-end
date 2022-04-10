@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export default axios.create({
-  baseURL: 'endereco',
-});
+const baseURL: string = 'http://localhost:3001';
+
+export default axios.create({ baseURL });

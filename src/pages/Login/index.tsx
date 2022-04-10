@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import Input from '../../components/Input/indx';
+import Input from '../../components/Input';
 import api from '../../services/api';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../state/user/userState';
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
     });
 
     try {
-      await api.post('/session', data);
+      // await api.get('/session', data);
 
       dispatch({
         type: '@USER/SIGN_IN_SUCCESS',

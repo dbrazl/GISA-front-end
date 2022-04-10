@@ -6,10 +6,14 @@ declare module 'styled-components' {
       white: string,
       black: string,
       blue: string,
+      greyLight: string,
+      greyMedium: string,
     },
     font: {
       sizes: {
         big: string,
+        label: string,
+        subtitle: string,
       }
     },
     breakpoints: {
