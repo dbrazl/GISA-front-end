@@ -5,7 +5,7 @@ interface IRoute {
   signed: boolean;
 }
 
-export const PrivateRoute = ({  signed }: IRoute) => {
+export const PrivateRoute = ({ signed }: IRoute) => {
   return signed ? <Outlet /> : <Navigate to="/" />;
 }
 
