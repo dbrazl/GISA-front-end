@@ -1,8 +1,32 @@
 {
   "associateds": [
     {
-      "id": 1,
-      "email": "daniel@gmail.com"
+      "name": "Daniel Braz",
+      "address": "Rua L, Avenida X, Cidade W, Brasil, 00000-000",
+      "academicFormation": "Engenheiro de software",
+      "healthCare": "ACTIVE",
+      "ageGroup": "20 A 30 ANOS",
+      "healthCareType": "VIP",
+      "dentalMedicalPlan": true,
+      "healthInfo": {
+        "medicalAppointments": 12,
+        "medicalExams": 5,
+        "coverage": ["Todos os exames disponíveis na clínica"]
+      }
+    },
+    {
+      "name": "Mariana Esteves",
+      "address": "Rua L, Avenida X, Cidade W, Brasil, 00000-000",
+      "academicFormation": "PO",
+      "healthCare": "ACTIVE",
+      "ageGroup": "30 A 40 ANOS",
+      "healthCareType": "APARTMENT",
+      "dentalMedicalPlan": true,
+      "healthInfo": {
+        "medicalAppointments": 6,
+        "medicalExams": 6,
+        "coverage": ["Atendimento a domicílio", "Exames gratuítos"]
+      }
     }
   ]
 }

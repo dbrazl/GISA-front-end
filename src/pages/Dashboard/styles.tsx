@@ -102,3 +102,30 @@ export const Version = styled.div`
   margin-bottom: 20px;
   line-height: 20px;
 `;
+
+export const List = styled.ul`
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ListItem = styled.li`
+  width: 100%;
+  height: 45px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 2px;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  & + & {
+    margin-top: 10px;
+  }
+`;
+
+export const LabelListItem = styled.p`
+  font-size: ${({ theme }) => theme.font.sizes.label};
+  color: ${({ theme }) => theme.colors.black};
+  font-weight: normal;
+  margin: auto 0;
+`;
