@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FiLogOut, FiEdit2 } from 'react-icons/fi';
+import { Form } from '@unform/web';
 
 export const Container = styled.div`
   width: 100%;
@@ -144,3 +145,33 @@ export const EditIcon = styled(FiEdit2)`
   height: 20px;
   color: ${({ theme }) => theme.colors.black};
 `;
+
+export const ModalName = styled.p`
+  font-size: ${({ theme }) => theme.font.sizes.subtitle};
+  font-weight: bold;
+  margin-bottom: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+export const ModalForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+
+  select {
+    margin-top: 20px;
+  }
+`;
+
+export const ModalButton = styled.button`
+  height: 45px;
+  width: 150px;
+  background-color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.white};
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 20px;
+`;
+

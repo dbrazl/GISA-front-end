@@ -8,6 +8,7 @@ declare module 'styled-components' {
       blue: string,
       greyLight: string,
       greyMedium: string,
+      blackOpacity: string,
     },
     font: {
       sizes: {

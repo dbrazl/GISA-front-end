@@ -4,7 +4,8 @@ export default {
     black: '#000',
     blue: '#4D77FF',
     greyLight: '#f5f5f5',
-    greyMedium: '#eee'
+    greyMedium: '#eee',
+    blackOpacity: 'rgba(0, 0, 0, 0.16)'
   },
   font: {
     sizes: {
