@@ -28,5 +28,14 @@
         "coverage": ["Atendimento a domicílio", "Exames gratuítos"]
       }
     }
+  ],
+  "serviceProviders": [
+    {
+      "name": "Rafael Lima",
+      "address": "Rua L, Avenida X, Cidade W, Brasil, 00000-000",
+      "academicFormation": "Médico pediatra",
+      "convened": "Hospital Santa Maria",
+      "status": "ACTIVE"
+    }
   ]
 }

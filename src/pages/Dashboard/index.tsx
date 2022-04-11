@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Associated } from '../../models/Associated';
+import { ServiceProvider } from '../../models/ServiceProviders';
 import api from '../../services/api';
 
 import {
@@ -21,6 +22,7 @@ import {
 const Dashboard: React.FC = () => {
   const [selectedSideMenu, setSelectedSideMenu] = useState<string>();
   const [associateds, setAssociateds] = useState<Associated[]>([]);
+  const [serviceProviders, setServiceProviders] = useState<ServiceProvider[]>([]);
 
   async function getAssociateds(): Promise<void> {
     try {
@@ -45,10 +47,36 @@ const Dashboard: React.FC = () => {
     );
   }
 
+  async function getServiceProviders(): Promise<void> {
+    try {
+      const response = await api.get('/serviceProviders');
+      setServiceProviders(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleServiceProvidersSelected(): Promise<void> {
+    setSelectedSideMenu('Prestadores');
+    await getServiceProviders();
+  }
+
+  function renderServiceProvider(provider: ServiceProvider): React.ReactElement {
+    return (
+      <ListItem>
+        <LabelListItem>{provider.name}</LabelListItem>
+        <LabelListItem>{provider.academicFormation}</LabelListItem>
+      </ListItem>
+    );
+  }
+
   function getPageContent(): React.ReactElement | React.ReactElement[] {
     switch(selectedSideMenu) {
       case 'Associados':
         return associateds.map(renderAssociated);
+
+      case 'Prestadores':
+        return serviceProviders.map(renderServiceProvider);
 
       default:
         return <></>
@@ -74,7 +102,7 @@ const Dashboard: React.FC = () => {
           </MenuOption>
           <MenuOption
             className={selectedSideMenu === 'Prestadores' ? 'selected' : ''}
-            onClick={() => setSelectedSideMenu('Prestadores')}
+            onClick={() => handleServiceProvidersSelected()}
           >
               Prestadores
           </MenuOption>
