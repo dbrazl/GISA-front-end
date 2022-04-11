@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogOut, FiEdit2 } from 'react-icons/fi';
 
 export const Container = styled.div`
   width: 100%;
@@ -116,7 +116,7 @@ export const ListItem = styled.li`
   border-radius: 2px;
   padding: 0 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 30px;
 
   & + & {
     margin-top: 10px;
@@ -128,4 +128,19 @@ export const LabelListItem = styled.p`
   color: ${({ theme }) => theme.colors.black};
   font-weight: normal;
   margin: auto 0;
+`;
+
+export const ListButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const ListButton = styled.button`
+  background-color: transparent;
+`;
+
+export const EditIcon = styled(FiEdit2)`
+  width: 20px;
+  height: 20px;
+  color: ${({ theme }) => theme.colors.black};
 `;

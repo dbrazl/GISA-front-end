@@ -17,6 +17,9 @@ import {
   List,
   ListItem,
   LabelListItem,
+  ListButtonContainer,
+  EditIcon,
+  ListButton,
  } from './styles';
 
 const Dashboard: React.FC = () => {
@@ -43,6 +46,11 @@ const Dashboard: React.FC = () => {
       <ListItem>
         <LabelListItem>{associated.name}</LabelListItem>
         <LabelListItem>{associated.healthCareType}</LabelListItem>
+        <ListButtonContainer>
+          <ListButton>
+            <EditIcon />
+          </ListButton>
+        </ListButtonContainer>
       </ListItem>
     );
   }
@@ -66,6 +74,11 @@ const Dashboard: React.FC = () => {
       <ListItem>
         <LabelListItem>{provider.name}</LabelListItem>
         <LabelListItem>{provider.academicFormation}</LabelListItem>
+        <ListButtonContainer>
+          <ListButton>
+            <EditIcon />
+          </ListButton>
+        </ListButtonContainer>
       </ListItem>
     );
   }
