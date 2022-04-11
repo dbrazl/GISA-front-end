@@ -83,7 +83,7 @@ export const MenuOption = styled.a`
 
   transition: all 200ms;
 
-  &:hover {
+  &:hover, &.selected {
     color: ${({ theme }) => theme.colors.white};
     background-color: ${({ theme }) => theme.colors.blue};
     border-left: 1px solid ${({ theme }) => theme.colors.white};

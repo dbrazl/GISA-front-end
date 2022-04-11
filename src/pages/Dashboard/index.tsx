@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Container,
@@ -14,6 +14,8 @@ import {
  } from './styles';
 
 const Dashboard: React.FC = () => {
+  const [selectedSideMenu, setSelectedSideMenu] = useState<string>();
+
   return (
     <Container>
       <Header>
@@ -25,8 +27,18 @@ const Dashboard: React.FC = () => {
       <Content>
         <SideMenu>
           <ModuleName>MIC</ModuleName>
-          <MenuOption>Associados</MenuOption>
-          <MenuOption>Prestadores</MenuOption>
+          <MenuOption
+            className={selectedSideMenu === 'Associados' ? 'selected' : ''}
+            onClick={() => setSelectedSideMenu('Associados')}
+          >
+              Associados
+          </MenuOption>
+          <MenuOption
+            className={selectedSideMenu === 'Prestadores' ? 'selected' : ''}
+            onClick={() => setSelectedSideMenu('Prestadores')}
+          >
+              Prestadores
+          </MenuOption>
           <Version>versão<br/>0.1.0</Version>
         </SideMenu>
       </Content>
