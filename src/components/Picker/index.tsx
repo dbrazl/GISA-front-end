@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useField } from '@unform/core'
 
@@ -35,7 +36,7 @@ const Picker: React.FC<PickerType> = ({ name, items }) => {
   }, [fieldName, registerField])
 
   function renderOption(option: OptionType): React.ReactElement {
-    return <Option value={option.value}>{option.label}</Option>
+    return <Option key={uuidv4()} value={option.value}>{option.label}</Option>
   }
   
   return (

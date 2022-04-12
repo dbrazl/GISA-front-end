@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Header from '../../../components/Header';
 import Input from '../../../components/Input';
 import Modal from '../../../components/Modal';
@@ -62,7 +63,7 @@ const ServiceProviders: React.FC = () => {
 
   function renderServiceProvider(provider: ServiceProvider): React.ReactElement {
     return (
-      <ListItem>
+      <ListItem key={uuidv4()}>
         <LabelListItem>{provider.name}</LabelListItem>
         <LabelListItem>{provider.academicFormation}</LabelListItem>
         <ListButtonContainer>

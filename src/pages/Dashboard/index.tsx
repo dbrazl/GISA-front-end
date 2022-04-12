@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 
@@ -163,7 +164,7 @@ const Dashboard: React.FC = () => {
 
   function renderAssociated(associated: Associated): React.ReactElement {
     return (
-      <ListItem>
+      <ListItem key={uuidv4()}>
         <LabelListItem>{associated.name}</LabelListItem>
         <LabelListItem>{associated.healthCareType}</LabelListItem>
         <ListButtonContainer>
@@ -195,7 +196,7 @@ const Dashboard: React.FC = () => {
 
   function renderServiceProvider(provider: ServiceProvider): React.ReactElement {
     return (
-      <ListItem>
+      <ListItem key={uuidv4()}>
         <LabelListItem>{provider.name}</LabelListItem>
         <LabelListItem>{provider.academicFormation}</LabelListItem>
         <ListButtonContainer>
