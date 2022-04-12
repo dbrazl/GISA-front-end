@@ -153,7 +153,6 @@ const Dashboard: React.FC = () => {
       setSelectedSideMenu('Associados');
       await getAssociateds();
     }
-
   }
 
   function handleListItemClick(target: Associated | ServiceProvider): void {
@@ -185,8 +184,12 @@ const Dashboard: React.FC = () => {
   }
 
   async function handleServiceProvidersSelected(): Promise<void> {
-    setSelectedSideMenu('Prestadores');
-    await getServiceProviders();
+    if (window.screen.width < DESKTOP_RESOLUTION) {
+      navigate('providers');
+    } else {
+      setSelectedSideMenu('Prestadores');
+      await getServiceProviders();
+    }
   }
 
   function renderServiceProvider(provider: ServiceProvider): React.ReactElement {

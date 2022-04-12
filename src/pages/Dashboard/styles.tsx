@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiLogOut, FiEdit2 } from 'react-icons/fi';
+import { FiEdit2 } from 'react-icons/fi';
 import { Form } from '@unform/web';
 
 export const Container = styled.div`

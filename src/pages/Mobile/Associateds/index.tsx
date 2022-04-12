@@ -146,11 +146,6 @@ const Associateds: React.FC = () => {
     );
   }
 
-  function isServiceProvider(prof: Associated | ServiceProvider): prof is ServiceProvider {
-    return (prof as ServiceProvider).convened !== undefined;
-  }
-
-
   function handleModalFormSubmit(data: Associated | ServiceProvider): void {
     console.log(data);
   }
@@ -186,30 +181,18 @@ const Associateds: React.FC = () => {
               name="academicFormation"
               placeholder="Formação académica"
             />
-            {isServiceProvider(selectedProfile) ? (
-              <>
-                <Input
-                  name="covened"
-                  placeholder="Conveniado com a empresa"
-                />
-                <Picker name="status" items={PROVIDER_STATUS} />
-              </>
-            ) : (
-              <>
-                <Input
-                  name="medicalAppointments"
-                  placeholder="Número de consultas médicas"
-                />
-                <Input
-                  name="medicalExams"
-                  placeholder="Número de exames"
-                />
-                <Picker name="healthCare" items={ASSOCIATED_STATUS} />
-                <Picker name="ageGroup" items={AGE_GROUP} />
-                <Picker name="healthCareType" items={HEALTH_CARE_TYPE} />
-                <Picker name="dentalMedicalPlan" items={DENTAL_MEDICAL_PLAN} />
-              </>
-            )}
+            <Input
+              name="medicalAppointments"
+              placeholder="Número de consultas médicas"
+            />
+            <Input
+              name="medicalExams"
+              placeholder="Número de exames"
+            />
+            <Picker name="healthCare" items={ASSOCIATED_STATUS} />
+            <Picker name="ageGroup" items={AGE_GROUP} />
+            <Picker name="healthCareType" items={HEALTH_CARE_TYPE} />
+            <Picker name="dentalMedicalPlan" items={DENTAL_MEDICAL_PLAN} />
             <ModalButton>Salvar</ModalButton>
           </ModalForm>
         </Modal>
