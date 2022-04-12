@@ -28,6 +28,7 @@ const Input = ({ name, ...rest }: any) => {
     <Field
       name={name}
       ref={inputRef as any}
+      defaultValue={defaultValue}
       {...rest}
     />
   );

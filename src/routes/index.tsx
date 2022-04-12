@@ -12,6 +12,7 @@ import { PrivateRoute, PublicRoute } from './Route';
 
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
+import Associateds from '../pages/Mobile/Associateds';
 
 const AppRoutes: React.FC = () => {
   const { state } = useContext(UserContext);
@@ -24,6 +25,9 @@ const AppRoutes: React.FC = () => {
         </Route>
         <Route path="/dashboard" element={<PrivateRoute signed={state.status.signed} />}>
           <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route path="/dashboard/associateds" element={<PrivateRoute signed={state.status.signed && window.screen.width < 1024} />}>
+          <Route path="/dashboard/associateds" element={<Associateds />} />
         </Route>
       </Routes>
     </Router>

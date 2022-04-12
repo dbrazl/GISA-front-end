@@ -1,31 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
+import React, { useRef, useState, useEffect } from 'react';
+import Header from '../../../components/Header';
+import Input from '../../../components/Input';
+import Modal from '../../../components/Modal';
+import Picker, { OptionType } from '../../../components/Picker';
+import { AgeGroup, Associated, AssociatedStatus, HealthCareType } from '../../../models/Associated';
+import { ServiceProvider } from '../../../models/ServiceProviders';
+import api from '../../../services/api';
 
-import Input from '../../components/Input';
-import Modal from '../../components/Modal';
-import Picker, { OptionType } from '../../components/Picker';
-import { AgeGroup, Associated, AssociatedStatus, HealthCareType } from '../../models/Associated';
-import { ServiceProvider } from '../../models/ServiceProviders';
-import api from '../../services/api';
-
-import {
-  Container,
-  Content,
-  SideMenu,
-  MenuOption,
-  ModuleName,
-  Version,
-  List,
-  ListItem,
-  LabelListItem,
-  ListButtonContainer,
-  EditIcon,
-  ListButton,
-  ModalName,
-  ModalForm,
-  ModalButton,
- } from './styles';
+import { Container, List, ListItem, LabelListItem, ListButtonContainer, ListButton, EditIcon, ModalName, ModalForm, ModalButton } from './styles';
 
 const DEFAULT_ASSOCIATED: Associated = {
   name: 'Nome padrão',
@@ -125,36 +107,25 @@ const DENTAL_MEDICAL_PLAN: OptionType[] = [
   },
 ];
 
-const DESKTOP_RESOLUTION: number = 1024;
-
-const Dashboard: React.FC = () => {
-  const [selectedSideMenu, setSelectedSideMenu] = useState<string>();
+const Associateds: React.FC = () => {
   const [associateds, setAssociateds] = useState<Associated[]>([]);
-  const [serviceProviders, setServiceProviders] = useState<ServiceProvider[]>([]);
   const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider>(DEFAULT_ASSOCIATED);
   const [showModal, setShowModal] = useState<boolean>(false);
-  
+
   const modalFormRef = useRef();
-  const navigate = useNavigate();
 
-  async function getAssociateds(): Promise<void> {
-    try {
-      const response = await api.get('/associateds');
-      setAssociateds(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleAssociatedsSelected(): Promise<void> {
-    if (window.screen.width < DESKTOP_RESOLUTION) {
-      navigate('associateds');
-    } else {
-      setSelectedSideMenu('Associados');
-      await getAssociateds();
+  useEffect(() => {
+    async function getAssociateds(): Promise<void> {
+      try {
+        const response = await api.get('/associateds');
+        setAssociateds(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
-  }
+    getAssociateds();
+  }, []);
 
   function handleListItemClick(target: Associated | ServiceProvider): void {
     setShowModal(true)
@@ -175,50 +146,10 @@ const Dashboard: React.FC = () => {
     );
   }
 
-  async function getServiceProviders(): Promise<void> {
-    try {
-      const response = await api.get('/serviceProviders');
-      setServiceProviders(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleServiceProvidersSelected(): Promise<void> {
-    setSelectedSideMenu('Prestadores');
-    await getServiceProviders();
-  }
-
-  function renderServiceProvider(provider: ServiceProvider): React.ReactElement {
-    return (
-      <ListItem>
-        <LabelListItem>{provider.name}</LabelListItem>
-        <LabelListItem>{provider.academicFormation}</LabelListItem>
-        <ListButtonContainer>
-          <ListButton onClick={() => handleListItemClick(provider)}>
-            <EditIcon />
-          </ListButton>
-        </ListButtonContainer>
-      </ListItem>
-    );
-  }
-
-  function getPageContent(): React.ReactElement | React.ReactElement[] {
-    switch(selectedSideMenu) {
-      case 'Associados':
-        return associateds.map(renderAssociated);
-
-      case 'Prestadores':
-        return serviceProviders.map(renderServiceProvider);
-
-      default:
-        return <></>
-    }
-  }
-
   function isServiceProvider(prof: Associated | ServiceProvider): prof is ServiceProvider {
     return (prof as ServiceProvider).convened !== undefined;
   }
+
 
   function handleModalFormSubmit(data: Associated | ServiceProvider): void {
     console.log(data);
@@ -234,27 +165,9 @@ const Dashboard: React.FC = () => {
   return (
     <Container>
       <Header />
-      <Content>
-        <SideMenu>
-          <ModuleName>MIC</ModuleName>
-          <MenuOption
-            className={selectedSideMenu === 'Associados' ? 'selected' : ''}
-            onClick={() => handleAssociatedsSelected()}
-          >
-              Associados
-          </MenuOption>
-          <MenuOption
-            className={selectedSideMenu === 'Prestadores' ? 'selected' : ''}
-            onClick={() => handleServiceProvidersSelected()}
-          >
-              Prestadores
-          </MenuOption>
-          <Version>versão<br/>0.1.0</Version>
-        </SideMenu>
-        <List>
-          {getPageContent()}
-        </List>
-      </Content>
+      <List>
+        {associateds.map(renderAssociated)}
+      </List>
       {showModal ? 
         <Modal
           onCloseModal={() => setShowModal(false)}
@@ -305,4 +218,4 @@ const Dashboard: React.FC = () => {
   );
 }
 
-export default Dashboard;
+export default Associateds;

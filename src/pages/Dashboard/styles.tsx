@@ -8,35 +8,6 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.greyLight};
 `;
 
-export const Header = styled.header`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  height: 50px;
-  background: ${({ theme }) => theme.colors.white};
-  padding: 0 20px;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.greyMedium};
-`;
-
-export const HeaderMenu = styled.button`
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-`;
-
-export const Label = styled.p`
-  font-size: ${({ theme }) => theme.font.sizes.label};
-  color: ${({ theme }) => theme.colors.black};
-`;
-
-export const ExitIcon = styled(FiLogOut)`
-  margin-left: 10px;
-  width: 20px;
-  height: 20px;
-  color: ${({ theme }) => theme.colors.black};
-`;
-
 export const Content = styled.section`
   display: flex;
   width: 100%;
@@ -75,22 +46,28 @@ export const MenuOption = styled.a`
   font-weight: normal;
   color: ${({ theme }) => theme.colors.black};
   height: 40px;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
   display: flex;
   align-items: center;
   padding-left: 20px;
   margin-left: 20px;
   border-left: 1px solid ${({ theme }) => theme.colors.blue};
+  cursor: pointer;
 
   transition: all 200ms;
 
-  &:hover, &.selected {
-    color: ${({ theme }) => theme.colors.white};
-    background-color: ${({ theme }) => theme.colors.blue};
-    border-left: 1px solid ${({ theme }) => theme.colors.white};
-    font-weight: bold;
-    cursor: pointer;
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.sizes.minorDesktop + theme.breakpoints.unit}) {
+    width: calc(100% - 20px);
+    
+    &:hover, &.selected {
+      color: ${({ theme }) => theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.blue};
+      border-left: 1px solid ${({ theme }) => theme.colors.white};
+      font-weight: bold;
+    }
   }
+
 `;
 
 export const Version = styled.div`
@@ -108,6 +85,11 @@ export const List = styled.ul`
   padding: 20px;
   width: 100%;
   height: 100%;
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sizes.minorDesktop + theme.breakpoints.unit}) {
+    display: block;
+  }
 `;
 
 export const ListItem = styled.li`
