@@ -98,7 +98,7 @@ const DENTAL_MEDICAL_PLAN: OptionType[] = [
 
 const Associateds: React.FC = () => {
   const [associateds, setAssociateds] = useState<Associated[]>([]);
-  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider>(DEFAULT_ASSOCIATED);
+  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider | null>(DEFAULT_ASSOCIATED);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const modalFormRef = useRef();
@@ -136,14 +136,27 @@ const Associateds: React.FC = () => {
   }
 
   function handleModalFormSubmit(data: Associated | ServiceProvider): void {
-    console.log(data);
+    if (selectedProfile) {
+      console.log('EDIT');
+    } else {
+      console.log('CREATE');
+    }
   }
 
   function getIntialDataForm() {
-    return {
-      ...selectedProfile,
-      ...((selectedProfile as Associated)?.healthInfo || [])
-    };
+    if (selectedProfile) {
+      return {
+        ...selectedProfile,
+        ...((selectedProfile as Associated)?.healthInfo || [])
+      };
+    }
+
+    return {};
+  }
+
+  function onCloseModal(): void {
+    setShowModal(false);
+    setSelectedProfile(null);
   }
 
   return (
@@ -154,10 +167,14 @@ const Associateds: React.FC = () => {
       </List>
       {showModal ? 
         <Modal
-          onCloseModal={() => setShowModal(false)}
+          onCloseModal={() => onCloseModal()}
         >
           <ModalName>Edição de cadatro</ModalName>
-          <ModalForm initialData={getIntialDataForm()} ref={modalFormRef as any} onSubmit={handleModalFormSubmit}>
+          <ModalForm
+            initialData={getIntialDataForm()}
+            ref={modalFormRef as any}
+            onSubmit={handleModalFormSubmit}
+          >
             <Input
               name="name"
               placeholder="Nome"

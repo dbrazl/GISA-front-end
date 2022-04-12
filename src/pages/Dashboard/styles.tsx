@@ -82,10 +82,13 @@ export const Version = styled.div`
 `;
 
 export const List = styled.ul`
-  padding: 20px;
+  padding: 0 20px;
+  padding-bottom: 20px;
   width: 100%;
   height: 100%;
   display: none;
+  position: relative;
+  overflow: scroll;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.sizes.minorDesktop + theme.breakpoints.unit}) {
     display: block;
@@ -104,6 +107,17 @@ export const ListItem = styled.li`
   & + & {
     margin-top: 10px;
   }
+`;
+
+export const ListHeader = styled.div`
+  width: 100%;
+  height: 65px;
+  background-color: ${({ theme }) => theme.colors.greyLight};
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 50px;
+  position: sticky;
+  inset: 0;
 `;
 
 export const LabelListItem = styled.p`

@@ -25,6 +25,7 @@ import {
   ModalName,
   ModalForm,
   ModalButton,
+  ListHeader,
  } from './styles';
 
 const DEFAULT_ASSOCIATED: Associated = {
@@ -131,7 +132,7 @@ const Dashboard: React.FC = () => {
   const [selectedSideMenu, setSelectedSideMenu] = useState<string>();
   const [associateds, setAssociateds] = useState<Associated[]>([]);
   const [serviceProviders, setServiceProviders] = useState<ServiceProvider[]>([]);
-  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider>(DEFAULT_ASSOCIATED);
+  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider | null>(DEFAULT_ASSOCIATED);
   const [showModal, setShowModal] = useState<boolean>(false);
   
   const modalFormRef = useRef();
@@ -206,6 +207,16 @@ const Dashboard: React.FC = () => {
     );
   }
 
+  function getListHeader(): React.ReactElement | React.ReactElement[] {
+    return (
+      <ListHeader>
+        <LabelListItem>Nome</LabelListItem>
+        <LabelListItem style={{ paddingLeft: '10px' }}>Plano de saúde</LabelListItem>
+        <LabelListItem>Ações</LabelListItem>
+      </ListHeader>
+    );
+  }
+
   function getPageContent(): React.ReactElement | React.ReactElement[] {
     switch(selectedSideMenu) {
       case 'Associados':
@@ -219,19 +230,32 @@ const Dashboard: React.FC = () => {
     }
   }
 
-  function isServiceProvider(prof: Associated | ServiceProvider): prof is ServiceProvider {
-    return (prof as ServiceProvider).convened !== undefined;
+  function isServiceProvider(prof: Associated | ServiceProvider | null): prof is ServiceProvider {
+    if (prof) {
+      return (prof as ServiceProvider).convened !== undefined;
+    }
+
+    return false;
+
   }
 
   function handleModalFormSubmit(data: Associated | ServiceProvider): void {
-    console.log(data);
+    if (selectedProfile) {
+      console.log('EDIT');
+    } else {
+      console.log('CREATE');
+    }
   }
 
   function getIntialDataForm() {
-    return {
-      ...selectedProfile,
-      ...((selectedProfile as Associated)?.healthInfo || [])
-    };
+    if (selectedProfile) {
+      return {
+        ...selectedProfile,
+        ...((selectedProfile as Associated)?.healthInfo || [])
+      };
+    }
+
+    return {};
   }
 
   return (
@@ -255,6 +279,7 @@ const Dashboard: React.FC = () => {
           <Version>versão<br/>0.1.0</Version>
         </SideMenu>
         <List>
+          {getListHeader()}
           {getPageContent()}
         </List>
       </Content>
@@ -263,7 +288,11 @@ const Dashboard: React.FC = () => {
           onCloseModal={() => setShowModal(false)}
         >
           <ModalName>Edição de cadatro</ModalName>
-          <ModalForm initialData={getIntialDataForm()} ref={modalFormRef as any} onSubmit={handleModalFormSubmit}>
+          <ModalForm
+            initialData={getIntialDataForm()}
+            ref={modalFormRef as any}
+            onSubmit={handleModalFormSubmit}
+          >
             <Input
               name="name"
               placeholder="Nome"

@@ -37,7 +37,7 @@ const PROVIDER_STATUS: OptionType[] = [
 
 const ServiceProviders: React.FC = () => {
   const [serviceProviders, setServiceProviders] = useState<ServiceProvider[]>([]);
-  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider>(DEFAULT_ASSOCIATED);
+  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider | null>(DEFAULT_ASSOCIATED);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const modalFormRef = useRef();
@@ -75,7 +75,16 @@ const ServiceProviders: React.FC = () => {
   }
 
   function handleModalFormSubmit(data: Associated | ServiceProvider): void {
-    console.log(data);
+    if (selectedProfile) {
+      console.log('EDIT');
+    } else {
+      console.log('CREATE');
+    }
+  }
+
+  function onCloseModal(): void {
+    setShowModal(false);
+    setSelectedProfile(null);
   }
 
   return (
@@ -86,10 +95,14 @@ const ServiceProviders: React.FC = () => {
       </List>
       {showModal ? 
         <Modal
-          onCloseModal={() => setShowModal(false)}
+          onCloseModal={() => onCloseModal()}
         >
           <ModalName>Edição de cadatro</ModalName>
-          <ModalForm initialData={selectedProfile} ref={modalFormRef as any} onSubmit={handleModalFormSubmit}>
+          <ModalForm
+            initialData={selectedProfile ? selectedProfile : {}}
+            ref={modalFormRef as any}
+            onSubmit={handleModalFormSubmit}
+          >
             <Input
               name="name"
               placeholder="Nome"
