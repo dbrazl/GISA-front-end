@@ -24,17 +24,6 @@ const DEFAULT_ASSOCIATED: Associated = {
   }
 };
 
-const PROVIDER_STATUS: OptionType[] = [
-  {
-    label: 'Ativo',
-    value: AssociatedStatus.ACTIVE,
-  },
-  {
-    label: 'Inativo',
-    value: AssociatedStatus.INACTIVE,
-  },
-];
-
 const ASSOCIATED_STATUS: OptionType[] = [
   {
     label: 'Ativo',
