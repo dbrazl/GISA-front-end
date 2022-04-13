@@ -125,6 +125,9 @@ export const LabelListItem = styled.p`
   color: ${({ theme }) => theme.colors.black};
   font-weight: normal;
   margin: auto 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const ListButtonContainer = styled.div`

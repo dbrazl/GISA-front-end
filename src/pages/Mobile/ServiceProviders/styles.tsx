@@ -8,10 +8,23 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.greyLight};
 `;
 
+export const ListHeader = styled.div`
+  width: 100%;
+  height: 65px;
+  background-color: ${({ theme }) => theme.colors.greyLight};
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 50px;
+  position: sticky;
+  inset: 0;
+`;
+
 export const List = styled.ul`
-  padding: 20px;
+  padding: 0 20px;
+  padding-bottom: 20px;
   width: 100%;
   height: calc(100% - 50px);
+  overflow: scroll;
 `;
 
 export const ListItem = styled.li`
@@ -33,6 +46,9 @@ export const LabelListItem = styled.p`
   color: ${({ theme }) => theme.colors.black};
   font-weight: normal;
   margin: auto 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const ListButtonContainer = styled.div`

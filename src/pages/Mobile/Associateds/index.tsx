@@ -8,7 +8,19 @@ import { AgeGroup, Associated, AssociatedStatus, HealthCareType } from '../../..
 import { ServiceProvider } from '../../../models/ServiceProviders';
 import api from '../../../services/api';
 
-import { Container, List, ListItem, LabelListItem, ListButtonContainer, ListButton, EditIcon, ModalName, ModalForm, ModalButton } from './styles';
+import {
+  Container,
+  List,
+  ListItem,
+  LabelListItem,
+  ListButtonContainer,
+  ListButton,
+  EditIcon,
+  ModalName,
+  ModalForm,
+  ModalButton,
+  ListHeader
+} from './styles';
 
 const DEFAULT_ASSOCIATED: Associated = {
   name: 'Nome padrão',
@@ -164,6 +176,11 @@ const Associateds: React.FC = () => {
     <Container>
       <Header />
       <List>
+        <ListHeader>
+          <LabelListItem>Nome</LabelListItem>
+          <LabelListItem style={{ paddingLeft: '10px' }}>Plano de saúde</LabelListItem>
+          <LabelListItem>Ações</LabelListItem>
+        </ListHeader>
         {associateds.map(renderAssociated)}
       </List>
       {showModal ? 

@@ -209,13 +209,28 @@ const Dashboard: React.FC = () => {
   }
 
   function getListHeader(): React.ReactElement | React.ReactElement[] {
-    return (
-      <ListHeader>
-        <LabelListItem>Nome</LabelListItem>
-        <LabelListItem style={{ paddingLeft: '10px' }}>Plano de saúde</LabelListItem>
-        <LabelListItem>Ações</LabelListItem>
-      </ListHeader>
-    );
+    switch(selectedSideMenu) {
+      case 'Associados':
+        return (
+          <ListHeader>
+            <LabelListItem>Nome</LabelListItem>
+            <LabelListItem style={{ paddingLeft: '10px' }}>Plano de saúde</LabelListItem>
+            <LabelListItem>Ações</LabelListItem>
+          </ListHeader>
+        );
+
+      case 'Prestadores':
+        return (
+          <ListHeader>
+            <LabelListItem>Nome</LabelListItem>
+            <LabelListItem style={{ paddingLeft: '10px' }}>Formação</LabelListItem>
+            <LabelListItem>Ações</LabelListItem>
+          </ListHeader>
+        );
+
+      default:
+        return <></>;
+    }
   }
 
   function getPageContent(): React.ReactElement | React.ReactElement[] {

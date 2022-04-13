@@ -8,7 +8,19 @@ import { AgeGroup, Associated, AssociatedStatus, HealthCareType } from '../../..
 import { ServiceProvider } from '../../../models/ServiceProviders';
 import api from '../../../services/api';
 
-import { Container, List, ListItem, LabelListItem, ListButtonContainer, ListButton, EditIcon, ModalName, ModalForm, ModalButton } from './styles';
+import {
+  Container,
+  List,
+  ListItem,
+  LabelListItem,
+  ListButtonContainer,
+  ListButton,
+  EditIcon,
+  ModalName,
+  ModalForm,
+  ModalButton,
+  ListHeader
+} from './styles';
 
 const DEFAULT_ASSOCIATED: Associated = {
   name: 'Nome padrão',
@@ -88,10 +100,28 @@ const ServiceProviders: React.FC = () => {
     setSelectedProfile(null);
   }
 
+  function multiply(mult: number, target: any) {
+    let obj: any = [];
+
+    for (let i = 0; i < mult; i++) {
+      obj = [
+        ...obj,
+        ...target,
+      ];
+    }
+
+    return obj;
+  }
+
   return (
     <Container>
       <Header />
       <List>
+        <ListHeader>
+          <LabelListItem>Nome</LabelListItem>
+          <LabelListItem style={{ paddingLeft: '10px' }}>Formação</LabelListItem>
+          <LabelListItem>Ações</LabelListItem>
+        </ListHeader>
         {serviceProviders.map(renderServiceProvider)}
       </List>
       {showModal ? 
