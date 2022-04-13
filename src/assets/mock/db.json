@@ -5,16 +5,20 @@
       "address": "Rua L, Avenida X, Cidade W, Brasil, 00000-000",
       "academicFormation": "Engenheiro de software",
       "healthCare": "ACTIVE",
-      "ageGroup": "20 A 30 ANOS",
-      "healthCareType": "VIP",
-      "dentalMedicalPlan": true,
+      "ageGroup": "0 A 10 ANOS",
+      "healthCareType": "APARTMENT",
+      "dentalMedicalPlan": "true",
       "healthInfo": {
         "medicalAppointments": 12,
         "medicalExams": 5,
-        "coverage": ["Todos os exames disponíveis na clínica"]
-      }
+        "coverage": [
+          "Todos os exames disponíveis na clínica"
+        ]
+      },
+      "id": 1
     },
     {
+      "id": 2,
       "name": "Mariana Esteves",
       "address": "Rua L, Avenida X, Cidade W, Brasil, 00000-000",
       "academicFormation": "PO",
@@ -25,8 +29,23 @@
       "healthInfo": {
         "medicalAppointments": 6,
         "medicalExams": 6,
-        "coverage": ["Atendimento a domicílio", "Exames gratuítos"]
+        "coverage": [
+          "Atendimento a domicílio",
+          "Exames gratuítos"
+        ]
       }
+    },
+    {
+      "name": "Ana Maria",
+      "address": "Rua do China",
+      "academicFormation": "Engenharia Mecânica",
+      "medicalAppointments": "2",
+      "medicalExams": "2",
+      "healthCare": "INACTIVE",
+      "ageGroup": "30 A 40 ANOS",
+      "healthCareType": "INFIRMARY",
+      "dentalMedicalPlan": "true",
+      "id": 3
     }
   ],
   "serviceProviders": [
@@ -34,8 +53,17 @@
       "name": "Rafael Lima",
       "address": "Rua L, Avenida X, Cidade W, Brasil, 00000-000",
       "academicFormation": "Médico pediatra",
-      "convened": "Hospital Santa Maria",
-      "status": "ACTIVE"
+      "convened": "",
+      "status": "ACTIVE",
+      "id": 3
+    },
+    {
+      "name": "Luiz Otavio",
+      "address": "Rua Mandela",
+      "academicFormation": "Cirúrgião",
+      "convened": "CardioVita",
+      "status": "ACTIVE",
+      "id": 4
     }
   ]
 }

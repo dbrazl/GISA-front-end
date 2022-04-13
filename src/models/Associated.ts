@@ -1,4 +1,5 @@
 export type Associated = {
+  id: number;
   name: string;
   address: string;
   academicFormation: string;

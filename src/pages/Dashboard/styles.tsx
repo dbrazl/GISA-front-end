@@ -158,7 +158,7 @@ export const ModalForm = styled(Form)`
   display: flex;
   flex-direction: column;
 
-  select {
+  div#select-container {
     margin-top: 20px;
   }
 `;

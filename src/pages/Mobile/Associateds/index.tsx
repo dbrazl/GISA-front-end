@@ -6,7 +6,6 @@ import Input from '../../../components/Input';
 import Modal from '../../../components/Modal';
 import Picker, { OptionType } from '../../../components/Picker';
 import { AgeGroup, Associated, AssociatedStatus, HealthCareType } from '../../../models/Associated';
-import { ServiceProvider } from '../../../models/ServiceProviders';
 import api from '../../../services/api';
 
 import {
@@ -25,6 +24,7 @@ import {
 } from './styles';
 
 const DEFAULT_ASSOCIATED: Associated = {
+  id: 1,
   name: 'Nome padrão',
   address: 'Endereço qualquer',
   academicFormation: 'Profissão qualquer',
@@ -113,34 +113,50 @@ const DENTAL_MEDICAL_PLAN: OptionType[] = [
 
 const Associateds: React.FC = () => {
   const [associateds, setAssociateds] = useState<Associated[]>([]);
-  const [selectedProfile, setSelectedProfile] = useState<Associated | ServiceProvider | null>(DEFAULT_ASSOCIATED);
+  const [selectedProfile, setSelectedProfile] = useState<Associated | null>(DEFAULT_ASSOCIATED);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const modalFormRef = useRef();
 
   useEffect(() => {
-    async function getAssociateds(): Promise<void> {
-      try {
-        const response = await api.get('/associateds');
-        setAssociateds(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
     getAssociateds();
   }, []);
 
-  function handleListItemClick(target: Associated | ServiceProvider): void {
+  async function getAssociateds(): Promise<void> {
+    try {
+      const response = await api.get('/associateds');
+      setAssociateds(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function handleListItemClick(target: Associated): void {
     setShowModal(true)
     setSelectedProfile(target);
+  }
+
+  function getHealthCareType(healthCareType: string): string {
+    switch(healthCareType) {
+      case HealthCareType.APARTMENT:
+        return 'Apartamento';
+
+      case HealthCareType.INFIRMARY:
+        return 'Enfermaria';
+
+      case HealthCareType.VIP:
+        return 'VIP';
+
+      default:
+        return '';
+    }
   }
 
   function renderAssociated(associated: Associated): React.ReactElement {
     return (
       <ListItem key={uuidv4()}>
         <LabelListItem>{associated.name}</LabelListItem>
-        <LabelListItem>{associated.healthCareType}</LabelListItem>
+        <LabelListItem>{getHealthCareType(associated.healthCareType)}</LabelListItem>
         <ListButtonContainer>
           <ListButton onClick={() => handleListItemClick(associated)}>
             <EditIcon />
@@ -150,12 +166,22 @@ const Associateds: React.FC = () => {
     );
   }
 
-  function handleModalFormSubmit(data: Associated | ServiceProvider): void {
+  async function handleModalFormSubmit(data: Associated): Promise<void> {
     if (selectedProfile) {
-      console.log('EDIT');
+      const schema  = copyObj(data);
+      delete schema.medicalAppointments;
+      delete schema.medicalExams;
+      schema.healthInfo = selectedProfile.healthInfo;
+
+      await api.put(`/associateds/${selectedProfile.id}`, schema);
+      await getAssociateds();
     } else {
-      console.log('CREATE');
+      await api.post(`/associateds`, data);
+      await getAssociateds();
     }
+
+    setShowModal(false);
+    setSelectedProfile(null);
   }
 
   function getIntialDataForm() {
@@ -177,6 +203,10 @@ const Associateds: React.FC = () => {
   function addAssociatedAction() {
     setSelectedProfile(null);
     setShowModal(true);
+  }
+
+  function copyObj(obj: any): any {
+    return JSON.parse(JSON.stringify(obj));;
   }
 
   return (
@@ -223,10 +253,10 @@ const Associateds: React.FC = () => {
               name="medicalExams"
               placeholder="Número de exames"
             />
-            <Picker name="healthCare" items={ASSOCIATED_STATUS} />
-            <Picker name="ageGroup" items={AGE_GROUP} />
-            <Picker name="healthCareType" items={HEALTH_CARE_TYPE} />
-            <Picker name="dentalMedicalPlan" items={DENTAL_MEDICAL_PLAN} />
+            <Picker name="healthCare" label="Plano de saúde" items={ASSOCIATED_STATUS} />
+            <Picker name="ageGroup" label="Faixa etária" items={AGE_GROUP} />
+            <Picker name="healthCareType" label="Tipo de plano de saúde" items={HEALTH_CARE_TYPE} />
+            <Picker name="dentalMedicalPlan" label="Plano médico-odontológico" items={DENTAL_MEDICAL_PLAN} />
             <ModalButton>Salvar</ModalButton>
           </ModalForm>
         </Modal>

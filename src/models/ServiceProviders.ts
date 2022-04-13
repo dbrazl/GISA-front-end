@@ -1,4 +1,5 @@
 export type ServiceProvider = {
+  id: number;
   name: string;
   address: string;
   academicFormation: string;

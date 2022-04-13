@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { useField } from '@unform/core'
 
-import { Select, Option } from './styles';
+import { Select, Option, Label, Container } from './styles';
 
 export type OptionType = {
   label: string;
@@ -12,10 +12,11 @@ export type OptionType = {
 
 type PickerType = {
   name: string;
+  label: string;
   items: OptionType[];
 };
 
-const Picker: React.FC<PickerType> = ({ name, items }) => {
+const Picker: React.FC<PickerType> = ({ name, label, items }) => {
   const pickerRef = useRef()
   const { fieldName, defaultValue, registerField } = useField(name)
 
@@ -40,9 +41,12 @@ const Picker: React.FC<PickerType> = ({ name, items }) => {
   }
   
   return (
-    <Select name={name} ref={pickerRef as any} defaultValue={defaultValue}>
-      {items.map(renderOption)}
-    </Select>
+    <Container id='select-container'>
+      <Label htmlFor={name}>{label}</Label>
+      <Select id={name} name={name} ref={pickerRef as any} defaultValue={defaultValue}>
+        {items.map(renderOption)}
+      </Select>
+    </Container>
   );
 }
 
