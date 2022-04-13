@@ -27,7 +27,9 @@ import {
   ModalForm,
   ModalButton,
   ListHeader,
+  ButtonsContainer,
  } from './styles';
+import AddButton from '../../components/AddButton';
 
 const DEFAULT_ASSOCIATED: Associated = {
   name: 'Nome padrão',
@@ -295,6 +297,9 @@ const Dashboard: React.FC = () => {
           <Version>versão<br/>0.1.0</Version>
         </SideMenu>
         <List>
+          <ButtonsContainer>
+            <AddButton label="Adicionar associado" />
+          </ButtonsContainer>
           {getListHeader()}
           {getPageContent()}
         </List>

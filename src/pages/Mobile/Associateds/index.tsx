@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import AddButton from '../../../components/AddButton';
 import Header from '../../../components/Header';
 import Input from '../../../components/Input';
 import Modal from '../../../components/Modal';
@@ -19,7 +20,8 @@ import {
   ModalName,
   ModalForm,
   ModalButton,
-  ListHeader
+  ListHeader,
+  ButtonsContainer
 } from './styles';
 
 const DEFAULT_ASSOCIATED: Associated = {
@@ -176,6 +178,9 @@ const Associateds: React.FC = () => {
     <Container>
       <Header />
       <List>
+        <ButtonsContainer>
+          <AddButton label="Adicionar associado" />
+        </ButtonsContainer>
         <ListHeader>
           <LabelListItem>Nome</LabelListItem>
           <LabelListItem style={{ paddingLeft: '10px' }}>Plano de saúde</LabelListItem>

@@ -117,7 +117,7 @@ export const ListHeader = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 50px;
   position: sticky;
-  inset: 0;
+  top: 80px;
 `;
 
 export const LabelListItem = styled.p`
@@ -174,3 +174,11 @@ export const ModalButton = styled.button`
   margin-top: 20px;
 `;
 
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  position: sticky;
+  inset: 0;
+  background-color: ${({ theme }) => theme.colors.greyLight};
+`;
