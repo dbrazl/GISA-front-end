@@ -275,6 +275,12 @@ const Dashboard: React.FC = () => {
 
     return {};
   }
+  
+  function addNewListItemAction() {
+    setSelectedProfile(null);
+    setShowModal(true);
+  }
+
 
   return (
     <Container>
@@ -298,7 +304,7 @@ const Dashboard: React.FC = () => {
         </SideMenu>
         <List>
           <ButtonsContainer>
-            <AddButton label="Adicionar associado" />
+            <AddButton label="Adicionar associado" onClick={addNewListItemAction} />
           </ButtonsContainer>
           {getListHeader()}
           {getPageContent()}

@@ -174,12 +174,17 @@ const Associateds: React.FC = () => {
     setSelectedProfile(null);
   }
 
+  function addAssociatedAction() {
+    setSelectedProfile(null);
+    setShowModal(true);
+  }
+
   return (
     <Container>
       <Header />
       <List>
         <ButtonsContainer>
-          <AddButton label="Adicionar associado" />
+          <AddButton label="Adicionar associado" onClick={addAssociatedAction}/>
         </ButtonsContainer>
         <ListHeader>
           <LabelListItem>Nome</LabelListItem>

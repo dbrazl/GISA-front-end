@@ -102,31 +102,24 @@ const ServiceProviders: React.FC = () => {
     setSelectedProfile(null);
   }
 
-  function multiply(mult: number, target: any) {
-    let obj: any = [];
-
-    for (let i = 0; i < mult; i++) {
-      obj = [
-        ...obj,
-        ...target,
-      ];
-    }
-
-    return obj;
+  function addServiceProvidersAction() {
+    setSelectedProfile(null);
+    setShowModal(true);
   }
+
 
   return (
     <Container>
       <Header />
       <List>
+        <ButtonsContainer>
+          <AddButton label="Adicionar associado" onClick={addServiceProvidersAction} />
+        </ButtonsContainer>
         <ListHeader>
           <LabelListItem>Nome</LabelListItem>
           <LabelListItem style={{ paddingLeft: '10px' }}>Formação</LabelListItem>
           <LabelListItem>Ações</LabelListItem>
         </ListHeader>
-        <ButtonsContainer>
-          <AddButton label="Adicionar associado" />
-        </ButtonsContainer>
         {serviceProviders.map(renderServiceProvider)}
       </List>
       {showModal ? 
